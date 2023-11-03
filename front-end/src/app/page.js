@@ -53,7 +53,7 @@ export default function App() {
       <h1 className="text-white font-[15px] border-[1px] w-[200px] rounded-[10px] bg-[black] border-black w-[300px] h-[40px] flex justify-center items-center mt-[80px] mb-[30px]">
         User CRUD whit FS Module
       </h1>
-      <h1>HELLO :D</h1>
+      <h1>HELLO</h1>
       <div>
         <input
           placeholder="Name.."
