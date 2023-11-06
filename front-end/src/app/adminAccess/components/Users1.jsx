@@ -6,24 +6,15 @@ export function Users(props) {
   const [status, setStatus] = useState(false);
   const [upName, setUpName] = useState("");
   const [upAge, setUpAge] = useState("");
-  const [upWork, setUpWork] =  useState("")
+  const [upWork, setUpWork] =  useState("");
+  const [upPass, setUpPass] =  useState("")
   const { username, age, id, setUsers, password: correctPassword, work } = props;
 
   console.log(props)
 
-  const [password, SetPassword] = useState(false);
   function editID() {
     setStatus(!status);
     console.log("working");
-  }
-  function CompletePass(e) {
-    console.log("correctPassword", correctPassword);
-  
-    if (e.target.value == correctPassword) {
-      SetPassword(true);
-    } else {
-      // alert("WRONG PASSWORD!")
-    }
   }
   useEffect(() => {}, []);
   const UpUser = async () => {
@@ -31,7 +22,6 @@ export function Users(props) {
       alert("please enter a new username and age pls!")
     } else {
     setStatus(!status);
-    // 1698832344959
     console.log(id, "test");
     const upNewUser = await axios
       .put(`http://localhost:8000/users/${id}`, {
@@ -39,36 +29,22 @@ export function Users(props) {
         username: upName,
         age: upAge,
         work: upWork,
+        password: upPass,
       })
       .then((res) => {
         setUsers(res.data.data);
       });
     }
   };
-
-  console.log(password);
   return (
-    <div className="flex justify-between items-center">
-
-      {!password ? (
-        <div className="flex gap-[270px] justify-center items-center">
-          <div className="w-[50px]">
-            <h3>username:</h3>
-            <div>{username}</div>
-          </div>
-          <input
-            placeholder="Enter Password.."
-            onChange={CompletePass}
-            className="mr-[100px]"
-          />
-        </div>
-      ) : (
+    <div className="flex bg-[#ff9fc3] rounded-[5px] text-[white]">
         <div className="flex gap-[130px]">
           {status ? (
             <div className="flex">
-              <div className="flex align-center gap-[140px]">
+              <div className="flex align-center gap-[140px] text-[grey]">
                 <div className="w-[50px] mt-[8px] ml-[2px]">
                   <input
+                   className="rounded-[5px] outline-0"
                     placeholder="edit Name.."
                     onChange={(e) => setUpName(e.target.value)}
                     value={upName}
@@ -76,6 +52,7 @@ export function Users(props) {
                 </div>
                 <div className="w-[50px] mt-[8px] ml-[2px]">
                   <input
+                   className="rounded-[5px] outline-0"
                     placeholder="edit Age.."
                     onChange={(e) => setUpAge(e.target.value)}
                     value={upAge}
@@ -83,19 +60,27 @@ export function Users(props) {
                 </div>
                 <div className="w-[50px] mt-[8px] ml-[2px]">
                   <input
-                  className="w-[100px]"
+                  className="rounded-[5px] outline-0"
                     placeholder="edit Work.."
                     onChange={(e) => setUpWork(e.target.value)}
                     value={upWork}
                   />
                 </div>
+                <div className="w-[50px] mt-[8px] ml-[2px]">
+                  <input
+                   className="rounded-[5px] outline-0"
+                    placeholder="edit Password.."
+                    onChange={(e) => setUpPass(e.target.value)}
+                    value={upPass}
+                  />
+                </div>
               </div>
               <div
                 onClick={() => UpUser()}
-                className="w-[100px] h-[48px] flex items-center border-[1px] border-black ml-[64px]"
+                className="w-[100px] h-[48px] flex items-center border-[1px] border-[#ff9fc3] text-white ml-[150px]"
               >
                 <button className="ml-[3px] min-h-[45px] ">finish</button>
-                <img src="black_checkmark.png" className="w-[24px] h-[24px]" />
+                <img src="ill.webp" className="w-[24px] h-[24px]" />
               </div>
             </div>
           ) : (
@@ -113,19 +98,22 @@ export function Users(props) {
                   <h3>work:</h3>
                   <div>{work}</div>
                 </div>
+                <div className="w-[180px]">
+                    <h3>password:</h3>
+                    <div>{correctPassword}</div>
+                </div>
               </div>
               <div
                 onClick={() => editID()}
-                className="w-[100px] h-[100%] flex items-center border-[1px] border-black ml-[150px]"
+                className="w-[100px] h-[100%] flex items-center border-[1px] border-[#ff9fc3] ml-[150px]"
               >
                 <button className="ml-[3px] h-[46px]">edit</button>
-                <img src="pencil.vector1.jpeg" className="w-[24px] h-[24px]" />
+                <img src="White_pencil.png" className="w-[24px] h-[24px]" />
               </div>
              
             </div>
           )}
         </div>
-      )}
       
     </div>
   );

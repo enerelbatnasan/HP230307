@@ -2,8 +2,7 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Users } from "./components/Users";
-import  admin12  from "./jsons/admin.json"
+import { Users } from "./components/Users1";
 import { useRouter } from 'next/navigation'
 
 export default function App() {
@@ -15,7 +14,6 @@ export default function App() {
   const [admin, SetAdmin] = useState(true);
   const [work, SetWork] = useState("");
   const [id, SetId] = useState("");
-  const [adminList, setAdminList] = useState(admin12);
   const [adminAccess, setAdminAccess] =  useState(false);
   const [adminAccess1, setAdminAcces21] =  useState(false);
 
@@ -38,7 +36,6 @@ export default function App() {
         password: password,
         id: id,
         work: work,
-        password: password
       })
       .then((res) => {
         setUsers(res.data.data);
@@ -55,61 +52,18 @@ export default function App() {
     console.log(deleted.data.data);
     setUsers(deleted.data.data);
   }
-  function editID(){
-   // setUpdatestatus(!updatestatus)
-    console.log(" edit working ");
-  }
   function adminLogIN(){
-    SetAdmin(!admin)
-    console.log("Working admins")
-  }
-  function nameCheck(value){
-  
-    if(adminList[0].user == value){
-      setAdminAccess(true)
-
-    }
-  }
-  function passCheck(value){
-    console.log(adminList[0].password , value)
-    if(adminList[0].password == value){
-      setAdminAcces21(true)
-    }
-  }
-  function adminLogin(){
-    console.log(adminAccess , adminAccess1)
-    if(adminAccess == true, adminAccess1 == true){
-   router.push("/adminAccess")
-    }
+   router.push("/")
   }
   return (
-    <div className="App bg-[#474747] w-100% h-screen flex flex-col items-center ">
-      <div className="flex gap-[5px] mr-[1000px] mt-[20px] w-[300px]">
-        <h1 className="text-white text-[20px] justify-center min-w-[120px] ml-[50px]">Admin Login</h1>
-        <img onClick={()=>adminLogIN()} className="w-[24px] h-[24px] mr-[10px]" src="lock.png"/>
-        {admin ? (
-          <div></div>
-        )
-        :
-        (<div className="flex gap-[15px]">
-          <input
-          placeholder="Admin name.."
-          className="w-[150px] h-[30px] rounded-[7px]"
-          onChange={(e)=>nameCheck(e.target.value)}
-          />
-            <input
-          placeholder="Admin Password.."
-          className="w-[150px] h-[30px] rounded-[7px]"
-          onChange={(e)=>passCheck(e.target.value)}
-          />
-          <button onClick={()=>adminLogin()} className="w-[80px] border-[1px] bg-[black] text-white border-[black] rounded-[10px]">Log in</button>
-        </div>)
-        }
+    <div className="App bg-[#ffd1ea] w-100% h-screen flex flex-col items-center ">
+      <div className="flex gap-[5px] mt-[20px] w-[300px]">
+        <h1 className="text-white text-[20px] justify-center ml-[45px]">Admin Access Page</h1>
+        <img onClick={()=>adminLogIN()} className="w-[32px] h-[32px] mb-[-10px]" src="shiny_star.webp"/>
       </div>
-      <h1 className="text-white font-[15px] border-[1px] w-[200px] rounded-[10px] bg-[black] border-black w-[300px] h-[40px] flex justify-center items-center mt-[80px] mb-[30px]">
+      <h1 className="text-white font-[15px] border-[1px] w-[200px] rounded-[10px] bg-[#ff9fc3] border-[#ff9fc3] w-[300px] h-[40px] flex justify-center items-center mt-[80px] mb-[30px]">
         User CRUD whit FS Module
       </h1>
-      {/* <h1>HELLO</h1> */}
       <div>
         <input
           placeholder="Name.."
@@ -132,7 +86,7 @@ export default function App() {
           onChange={(e) => SetPassword(e.target.value)}
         />
         
-        <button onClick={() => NewUser()} className="bg-black text-white">
+        <button onClick={() => NewUser()} className="bg-[#ff9fc3] text-white">
           {" "}
           submit
         </button>
@@ -141,7 +95,7 @@ export default function App() {
       <div>
         <div className="flex flex-col gap-[20px]">
           {users?.map((e) => (
-            <div className="flex  w-[700px] h-[auto] bg-[white] items-center border-[1px] border-[black] rounded-[10px]">
+            <div className="flex  w-[1000px] h-[auto] bg-[#ff9fc3] items-center border-[1px] border-[#ff9fc3] rounded-[10px]">
               <Users
                 username={e.username}
                 age={e.age}
@@ -155,12 +109,12 @@ export default function App() {
               <div className="flex">
                 <div
                   onClick={() => deleteID(e)}
-                  className="flex gap-[20px] border-[1px] border-[black] h-[48px] w-[100px] justify-start items-center rounded-r-[10px]"
+                  className="flex gap-[20px] border-[1px] border-[#ff9fc3] h-[48px] w-[100px] justify-start items-center rounded-r-[10px] text-white"
                 >
                   <button className="">delete</button>
                   <img
-                    src="trash-var-solid.png"
-                    className="w-[24px] h-[24px]"
+                    src="mental.jpeg"
+                    className="w-[24px] h-[24px] rounded-[50%]"
                   />
                 </div>
               </div>
